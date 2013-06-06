@@ -1,0 +1,12 @@
+{
+  "parts": [
+    {
+      "name": "ep_hide_referrer",
+      "client_hooks": {
+        "aceGetFilterStack": "ep_hide_referrer/static/js/index:aceGetFilterStack",
+        "aceCreateDomLine": "ep_hide_referrer/static/js/index:aceCreateDomLine"
+      }
+    }
+  ]
+}
+
