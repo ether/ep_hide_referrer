@@ -1,25 +1,13 @@
-exports.aceGetFilterStack = function(name, context){
-  return [
-    context.linestylefilter.getRegexpFilter(
-      new RegExp("http.+((\.[pP][nN][gG])|(\.[jJ][pP][gG])|(\.[gG][iI][fF])|(\.[jJ][pP][eE][gG])|(\.[bB][mM][pP]))", "g"), 'image')
-  ];
+exports.postAceInit = function(hook, context){
+  $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").on('click', "a", function (e){
+    var r = confirm("following this link will leak the pad url of this pad, are you sure you want to continue?");
+    if(r){
+      window.open(e.currentTarget.innerHTML, '_blank');
+      e.preventDefault();
+      return false;
+    }else{
+      e.preventDefault();
+      return false;
+    }
+  });
 }
-
-
-exports.aceCreateDomLine = function(name, args){
-  if (args.cls.indexOf('image') > -1) { // If it's an image
-    var src;
-    cls = args.cls.replace(/(^| )image:(\S+)/g, function(x0, space, image) {
-      src = image;
-      return space + "image image_" + image;
-    });
-
-   return [{
-     cls: cls,
-     extraOpenTags: '<img src="' + src + '" style="max-width:100%" /><br/>',
-     extraCloseTags:''
-   }];
-  }
-}
-
-
