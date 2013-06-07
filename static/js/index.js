@@ -1,13 +1,10 @@
 exports.postAceInit = function(hook, context){
   $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").on('click', "a", function (e){
-    var r = confirm("following this link will leak the pad url of this pad, are you sure you want to continue?");
-    if(r){
-      window.open(e.currentTarget.innerHTML, '_blank');
-      e.preventDefault();
-      return false;
-    }else{
-      e.preventDefault();
-      return false;
-    }
+    prompt(
+      "Copy this link and paste it to the adress bar of some other browser tab\n(to prevent the browser from leaking this pad's confidential URL as a \"referer\").\nCtrl-C + Ctrl-T + Ctrl-V + Enter should do the trick on most browsers ;)",
+      e.currentTarget.innerHTML
+    );
+    e.preventDefault();
+    return false;
   });
 }
