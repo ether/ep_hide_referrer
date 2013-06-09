@@ -1,7 +1,7 @@
 exports.postAceInit = function(hook, context){
   $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").on('click', "a", function (e){
-    window.open('/redirect');
     createCookie("url", e.originalEvent.srcElement.href);
+    window.open('/redirect');
     e.preventDefault();
     return false;
   });
