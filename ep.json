@@ -6,7 +6,8 @@
         "expressCreateServer" : "ep_hide_referrer/index:registerRoute"
       },
       "client_hooks": {
-        "postAceInit": "ep_hide_referrer/static/js/index:postAceInit"
+        "postAceInit": "ep_hide_referrer/static/js/index:postAceInit",
+        "postTimesliderInit": "ep_hide_referrer/static/js/index:postTimesliderInit"
       }
     }
   ]
