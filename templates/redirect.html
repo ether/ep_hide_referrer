@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+  <html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>External link</title>
+
+  <script type="text/javascript">
+    window.redir_onload = function() {
+      var urlhash = location.hash.substr(1);
+      if (urlhash.search(':')<0) {
+        urlhash = unescape(urlhash);
+      }
+      if (urlhash.search(/^https?:\/\//) !== 0) {
+        urlhash = '';
+      }
+      var the_content = document.getElementById('content');
+      if (urlhash) {
+        the_content.innerHTML = '<h4>Click to visit this exteral link</h4><h3><a href="'+urlhash+'">'+urlhash+'</a></h3>';
+      } else {
+        the_content.innerHTML = '<h4>Nothing to see here. Move along</h4>';
+      }
+    };
+  </script>
+</head>
+<body onload="redir_onload()">
+<div id="content" style="text-align:center">For the next trick, we'll need a volunteer with javascript enabled :)</div>
+</body>
+</html>
