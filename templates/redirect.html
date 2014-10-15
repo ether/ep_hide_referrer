@@ -4,24 +4,41 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>External link</title>
 
-  <script type="text/javascript">
-    window.redir_onload = function() {
-      var urlhash = location.hash.substr(1);
-      if (urlhash.search(':')<0) {
-        urlhash = unescape(urlhash);
+<script type="text/javascript">
+  window.redir_onload = function() {
+    var urlhash = location.hash.substr(1);
+    if (urlhash.search(':')<0) {
+      urlhash = unescape(urlhash);
+    }
+    if (urlhash.search(/^https?:\/\//) !== 0) {
+      urlhash = '';
+    }
+    var the_content = document.getElementById('content');
+    if (urlhash) {
+
+      urlhash = decodeURIComponent(urlhash);
+
+      if(!isUrl(urlhash)){
+        the_content.innerHTML = '<h4>bad url - posssible XSS attempt</h4>';
+        return;
       }
-      if (urlhash.search(/^https?:\/\//) !== 0) {
-        urlhash = '';
-      }
-      var the_content = document.getElementById('content');
-      if (urlhash) {
-        the_content.innerHTML = '<h4>Click to visit this exteral link</h4><h3><a href="'+urlhash+'">'+urlhash+'</a></h3>';
-      } else {
-        the_content.innerHTML = '<h4>Nothing to see here. Move along</h4>';
-      }
-    };
-  </script>
+
+      the_content.innerHTML = '<h4>Click to visit this exteral link</h4><h3><a href="'+urlhash+'">'+urlhash+'</a></h3>';
+    } else {
+      the_content.innerHTML = '<h4>Nothing to see here. Move along</h4>';
+    }
+  };
+
+
+  function isUrl(s) {    
+    var regexp = /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/;
+    return regexp.test(s);    
+  }
+</script>
 </head>
+
+
+
 <body onload="redir_onload()">
 <div id="content" style="text-align:center">For the next trick, we'll need a volunteer with javascript enabled :)</div>
 </body>
