@@ -23,7 +23,7 @@
         return;
       }
 
-      the_content.innerHTML = '<h4>Click to visit this exteral link</h4><h3><a href="'+urlhash+'">'+urlhash+'</a></h3>';
+      document.location = urlhash;
     } else {
       the_content.innerHTML = '<h4>Nothing to see here. Move along</h4>';
     }
