@@ -19,11 +19,11 @@
       urlhash = decodeURIComponent(urlhash);
 
       if(!isUrl(urlhash)){
-        the_content.innerHTML = '<h4>bad url - posssible XSS attempt</h4>';
+        the_content.innerHTML = '<h4>bad url - possible XSS attempt</h4>';
         return;
       }
 
-      the_content.innerHTML = '<h4>Click to visit this exteral link</h4><h3><a href="'+urlhash+'">'+urlhash+'</a></h3>';
+      the_content.innerHTML = '<h4>Click to visit this external link</h4><h3><a href="'+urlhash+'">'+urlhash+'</a></h3>';
     } else {
       the_content.innerHTML = '<h4>Nothing to see here. Move along</h4>';
     }
