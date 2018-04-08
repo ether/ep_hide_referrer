@@ -17,12 +17,19 @@
 
       // whitelist "safe" URL and URI schemes, and warn for others
       safe_regexp = /^(ftps?|https?):\/\/|(about|geo|mailto):/i;
+      var link = document.createElement('a');
+      link.href = urlhash;
+      link.appendChild(document.createTextNode(urlhash));
+      h3 = document.createElement('h3');
+      h3.appendChild(link);
+
       if (!safe_regexp.test(urlhash)) {
         the_content.innerHTML = '<h4>Unknown URI scheme &ndash; possible XSS attempt?</h4>' +
-          '<h4>Proceed with caution:</h4><h3><a href="'+urlhash+'">'+urlhash+'</a></h3>';
-        return;
+          '<h4>Proceed with caution:</h4>';
+        the_content.append(h3);
       } else {
-        the_content.innerHTML = '<h4>Referer protection &ndash; Click to visit this external link:</h4><h3><a href="'+urlhash+'">'+urlhash+'</a></h3>';
+        the_content.innerHTML = '<h4>Referer protection &ndash; Click to visit this external link:</h4>';
+        the_content.append(h3);
       }
     } else {
       the_content.innerHTML = '<h4>Nothing to see here. Move along.</h4>';
