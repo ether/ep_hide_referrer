@@ -5,7 +5,7 @@ exports.postAceInit = function(hook, context){
     return false;
   });
 
-  $('#chattext > p').on('click', "a", function (e){
+  $('#chattext').on('click', "a", function (e){
     window.open('../redirect#'+escape(e.currentTarget.href));
     e.preventDefault();
     return false;
