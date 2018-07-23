@@ -25,8 +25,8 @@
 
       if (!safe_regexp.test(urlhash)) {
         the_content.innerHTML = '<h4>Unknown URI scheme &ndash; possible XSS attempt?</h4>' +
-          '<h4>Proceed with caution:</h4>';
-        the_content.append(h3);
+          '<p><strong>This appears to be a malicious link.<br> If you are sure it\'s safe and you know what you\'re doing,<br> please copy and paste the following into your browser\'s address bar:</strong></p>';
+        the_content.append(link.href);
       } else {
         the_content.innerHTML = '<h4>Referer protection &ndash; Click to visit this external link:</h4>';
         the_content.append(h3);
