@@ -1,7 +1,7 @@
 {
   "name": "ep_hide_referrer",
   "description": "Don't pass the referring URL to third parties.  This handles the security/privacy issue where you don't want the third party service to know your pad URL.  Improves Privacy.",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "author": "johnyma22 (John McLear) <john@mclear.co.uk>",
   "contributors": [],
   "dependencies": {},
