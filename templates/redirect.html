@@ -11,11 +11,11 @@
     var the_content = document.getElementById('content');
     if (urlhash) {
       // The link generator (static/js/index.js) wraps the target URL with
-      // encodeURIComponent, so a single decodeURIComponent restores it.
-      // Decoding twice (the previous behavior, via legacy unescape() plus
-      // decodeURIComponent) breaks any URL whose path or query contains
-      // percent-encoded characters that should stay encoded — e.g. Plus
-      // Codes like G98H%2BG38 in Google Maps URLs (issue #80).
+      // encodeURIComponent, so a single decode restores it. Decoding twice
+      // (the previous behavior — see git history of issue #80) breaks any
+      // URL whose path or query contains percent-encoded characters that
+      // should stay encoded, e.g. Plus Codes like G98H%2BG38 in Google
+      // Maps URLs.
       try {
         urlhash = decodeURIComponent(urlhash);
       } catch (e) {
