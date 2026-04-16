@@ -7,13 +7,22 @@
 <script type="text/javascript">
   window.redir_onload = function() {
     var urlhash = location.hash.substr(1);
-    if (urlhash.search(':') < 0) {
-      urlhash = unescape(urlhash);
-    }
 
     var the_content = document.getElementById('content');
     if (urlhash) {
-      urlhash = decodeURIComponent(urlhash);
+      // The link generator (static/js/index.js) wraps the target URL with
+      // encodeURIComponent, so a single decode restores it. Decoding twice
+      // (the previous behavior — see git history of issue #80) breaks any
+      // URL whose path or query contains percent-encoded characters that
+      // should stay encoded, e.g. Plus Codes like G98H%2BG38 in Google
+      // Maps URLs.
+      try {
+        urlhash = decodeURIComponent(urlhash);
+      } catch (e) {
+        // Malformed percent-sequence (e.g. manually-crafted URL). Fall
+        // through with the raw hash; the safe-scheme check below still
+        // protects against unknown schemes.
+      }
 
       // whitelist "safe" URL and URI schemes, and warn for others
       safe_regexp = /^(ftps?|https?):\/\/|(about|geo|mailto):/i;
