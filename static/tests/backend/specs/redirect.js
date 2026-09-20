@@ -1,8 +1,6 @@
 'use strict';
 
 const assert = require('assert').strict;
-const fs = require('fs');
-const path = require('path');
 const common = require('ep_etherpad-lite/tests/backend/common');
 
 let agent;
@@ -42,7 +40,7 @@ describe(__filename, function () {
       'mailto:user@example.com?subject=Hello%20World',
     ];
     for (const url of cases) {
-      it(`preserves: ${url}`, function () {
+      it(`preserves: ${url}`, async function () {
         const round = decodeURIComponent(encodeURIComponent(url));
         assert.equal(round, url);
       });
