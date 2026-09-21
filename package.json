@@ -9,7 +9,7 @@
     "url": "https://github.com/ether/ep_hide_referrer.git"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "funding": {
     "type": "individual",
